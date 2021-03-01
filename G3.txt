@@ -1,0 +1,26 @@
+Grammar 3
+START  ::=  PROG  
+PROG  ::=  BLOCK      #   
+BLOCK  ::=  begin    BODY    end  
+BODY   ::=  S    BODYP  
+BODYP   ::=  ;    S    BODYP  
+BODYP   ::=   lambda   
+S  ::=  BLOCK  
+S  ::=  IFST  
+S  ::=  ASSI  
+IFST  ::=  if    E    then    S    IFP  
+IFP  ::=  else    S    fi  
+IFP  ::=  fi  
+ASSI  ::=  V    =    E  
+V  ::=  id  
+E  ::=  T    EP  
+EP  ::=  +    T    EP  
+EP  ::=  -    T    EP  
+EP  ::=   lambda  
+T  ::=  F    TP  
+TP  ::=  *    F    TP  
+TP  ::=  /    F    TP  
+TP  ::=   lambda  
+F  ::=  V  
+F  ::=  (    E    )  
+F  ::=  const

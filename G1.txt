@@ -1,0 +1,7 @@
+Grammar 1
+S  ::=  A S B
+S  ::=  lambda  
+A  ::=  a A 
+A  ::=  k  
+B  ::=  b B 
+B  ::=  t

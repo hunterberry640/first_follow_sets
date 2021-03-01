@@ -1,0 +1,6 @@
+Grammar 4
+S  ::=  asg  
+S  ::=  if C then S E  
+C  ::=  bool  
+E  ::=  lambda  
+E  ::=  else S

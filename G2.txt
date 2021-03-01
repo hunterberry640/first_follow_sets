@@ -1,0 +1,16 @@
+Grammar 2
+START  ::=  PROG  
+PROG  ::=  BLOCK      #   
+BLOCK  ::=  begin    BODY    end  
+BODY   ::=  BODY    ;    S  
+BODY   ::=  S   
+S  ::=  if    E    then    S    else    S    fi  
+S  ::=  if    E    then    S    fi  
+S  ::=  i    =    E  
+S  ::=  BLOCK  
+E  ::=  E    +    T  
+E  ::=  T  
+T  ::=  T    *    F  
+T  ::=  F  
+F  ::=  (    E    )  
+F  ::=  const

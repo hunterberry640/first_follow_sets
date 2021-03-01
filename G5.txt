@@ -1,0 +1,10 @@
+Grammar 4
+S  ::=  s  
+S  ::=  A a b 
+A  ::=  A S
+A  ::=  A a
+A  ::=  lambda
+A  ::=  B  
+B  ::=  B b
+B  ::=  b S
+B  ::=  b  
