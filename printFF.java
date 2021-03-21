@@ -94,10 +94,10 @@ public class printFF {
       followSets.put(nonterm, set); //initialize with empty sets
     }
 
-
+    
     System.out.println("\nFirst Sets:\n===");
     for (String nonterm : nonterminals) 
-    {
+    {//loop through all nonterminals and find first sets and print to terminal
       Set<String> set = new HashSet<>();
       set = findFirstSet(nonterm, set, null);
       System.out.println(nonterm + ": " + set.toString());
@@ -105,7 +105,7 @@ public class printFF {
     
     System.out.println("\nFollow Sets:\n===");
     for (String nonterm : nonterminals) 
-    {
+    {//loop through all nonterminals and find follow sets and print to terminal
       Set<String> set = new HashSet<>();
       set = findFollowSet(nonterm, set, null);
       followSets.get(nonterm).addAll(set);
@@ -113,6 +113,12 @@ public class printFF {
     }
   }
 
+
+  // For any production rule A → αB: Follow(B) = Follow(A)
+
+    // For any production rule A → αBβ,
+    //  If ∈ ∉ First(β), then Follow(B) = First(β)
+    //  If ∈ ∈ First(β), then Follow(B) = { First(β) – ∈ } ∪ Follow(A)
   public static Set<String> findFollowSet(String nonterminal, Set<String> set, String prev)
   {
     boolean hasLambda = false;
@@ -159,12 +165,12 @@ public class printFF {
             break;
           }else
           {
-           // If A → aBb, then First(b) ‐ {e} ⊆ Follow(B)
+           // For any production rule A → αBβ,
+           //  If ∈ ∉ First(β), then Follow(B) = First(β)
             Set<String> temp = new HashSet<>();
             temp = findFirstSet(rule.get(i+1), temp, rule.get(i+1)); //temp = first(b)
             
-            /*if (A → aBb and ε in First(b)),
-              then Follow(A) ⊆ Follow(B) */
+            
              // If ∈ ∈ First(β), then Follow(B) = { First(β) – ∈ } ∪ Follow(A)
             if(temp.contains("lambda"))
             {// If ∈ ∈ First(β)
@@ -205,7 +211,7 @@ public class printFF {
           
         }
         /*if A → αB: Follow(B) = Follow(A)*/
-        //B: nonterm
+        
         if(rule.get(rule.size()-1).equals(nonterminal) && !rule.get(0).equals(nonterminal) && prev != rule.get(0))
         { // if nonterm not follow by anything
           Set<String> temp = new HashSet<>();
@@ -219,14 +225,6 @@ public class printFF {
         }
       }
     }
-
-    
-
-    // For any production rule A → αB: Follow(B) = Follow(A)
-
-    // For any production rule A → αBβ,
-    //  If ∈ ∉ First(β), then Follow(B) = First(β)
-    //  If ∈ ∈ First(β), then Follow(B) = { First(β) – ∈ } ∪ Follow(A)
     return set;
 
   }
